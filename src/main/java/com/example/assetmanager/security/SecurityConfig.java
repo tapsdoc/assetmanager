@@ -1,7 +1,6 @@
-package com.example.assetmanager.security.config;
+package com.example.assetmanager.security;
 
-import com.example.assetmanager.security.filter.AuthenticationEntryPoint;
-import com.example.assetmanager.security.filter.JwtAccessDeniedHandler;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -19,23 +20,30 @@ public class SecurityConfig {
 
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-    private final AuthenticationEntryPoint authenticationEntryPoint;
+
+    /*@Bean
+    public WebMvcConfigurer corsMappingConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(@NonNull CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("*");
+            }
+        };
+    }*/
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().and().cors().disable()
+        http.csrf().disable()
             .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**").permitAll()
-                .anyRequest().authenticated()
+            .requestMatchers("/api/v1/auth/**").permitAll()
+            .anyRequest().permitAll()
             .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authenticationProvider(authenticationProvider)
-            .exceptionHandling()
-            .accessDeniedHandler(jwtAccessDeniedHandler)
-            .authenticationEntryPoint(authenticationEntryPoint)
-            .and()
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

@@ -1,4 +1,4 @@
-package com.example.assetmanager.security.config;
+package com.example.assetmanager.security;
 
 import com.google.common.base.Strings;
 import jakarta.servlet.FilterChain;

@@ -1,4 +1,4 @@
-package com.example.assetmanager.security.config;
+package com.example.assetmanager.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
