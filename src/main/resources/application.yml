@@ -9,14 +9,14 @@ server:
 spring:
   datasource:
     password: taps1234
-    url: jdbc:postgresql://localhost:5432/assetmanager
+    url: jdbc:mysql://localhost:3306/assetmanager
     username: postgres
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true
     show-sql: true
 
