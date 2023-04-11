@@ -1,0 +1,46 @@
+jwt:
+  secret: "ShVkYp3s6v9yGB5E7Hktdxd5gjhsh66bu68bfbsetcsvl8kb7fcrcc43xy6sMcQfTjWnZq4t7"
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  datasource:
+    password: taps1234
+    url: jdbc:postgresql://localhost:5432/assetmanager
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+#  flyway:
+#    baseline-version: 1
+#    baseline-description: Baseline migration
+#    locations: db/migration
+#    schemas: public
+#    table: flyway_schema_history
+
+  mail:
+    host: localhost
+    port: 1025
+    username: tapsdoc
+    password: taps1234
+
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 10000
+          timeout: 3000
+          writetimeout: 5000
