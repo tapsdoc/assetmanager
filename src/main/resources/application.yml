@@ -8,9 +8,9 @@ server:
 
 spring:
   datasource:
-    password: taps1234
+    password: yourpasswordformysql
     url: jdbc:mysql://localhost:3306/assetmanager
-    username: postgres
+    username: root
   jpa:
     hibernate:
       ddl-auto: update
