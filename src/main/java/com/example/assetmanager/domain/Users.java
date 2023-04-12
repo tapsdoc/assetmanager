@@ -1,7 +1,6 @@
 package com.example.assetmanager.domain;
 
 import com.example.assetmanager.common.Role;
-import com.example.assetmanager.domain.Employee;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;

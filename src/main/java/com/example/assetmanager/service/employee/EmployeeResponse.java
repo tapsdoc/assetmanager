@@ -4,14 +4,13 @@ import com.example.assetmanager.domain.Employee;
 import lombok.Data;
 import lombok.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Data
 public class EmployeeResponse {
 
+    private Long id;
     private String username;
     private String firstName;
     private String lastName;
@@ -23,6 +22,8 @@ public class EmployeeResponse {
 
     public static EmployeeResponse of(@NonNull Employee employee) {
         EmployeeResponse response = new EmployeeResponse();
+
+        response.setId(employee.getId());
         response.setUsername(employee.getUsers().getUsername());
         response.setFirstName(employee.getFirstName());
         response.setLastName(employee.getLastName());

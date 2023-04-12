@@ -1,6 +1,7 @@
 package com.example.assetmanager.service.employee;
 
 import com.example.assetmanager.domain.Employee;
+import com.example.assetmanager.domain.Users;
 import com.example.assetmanager.repository.DepartmentRepo;
 import com.example.assetmanager.repository.EmployeeRepo;
 import com.example.assetmanager.repository.UserRepo;
@@ -39,9 +40,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         var user = userRepo.findById(request.getUserId());
 
         if (user.isEmpty()) {
-            throw new IllegalStateException("User not found");
+            throw new RuntimeException("User not found!");
         }
-        employee.setUsers(user.get());
+
+        Users existingUser = user.get();
+        if (existingUser.getEmployee() != null) {
+            throw new RuntimeException("User already has an associated employee!");
+        }
         employee.setFirstName(request.getFirstName());
         employee.setLastName(request.getLastName());
 
