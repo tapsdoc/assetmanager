@@ -1,5 +1,6 @@
 package com.example.assetmanager.service.category;
 
+import com.example.assetmanager.domain.Asset;
 import com.example.assetmanager.domain.Category;
 import lombok.Data;
 import lombok.NonNull;
@@ -13,17 +14,16 @@ public class CategoryResponse {
 
     private Long id;
     private String name;
-    private List<String> categoryNames;
+    private List<String> assetNames;
 
     public static CategoryResponse of(@NonNull Category category) {
         CategoryResponse response = new CategoryResponse();
         response.setId(category.getId());
         response.setName(category.getName());
 
-
-        List<Category> categories = new ArrayList<>();
-        List<String> names = categories.stream().map(Category::getName).toList();
-        response.setCategoryNames(names);
+        List<Asset> assets = new ArrayList<>();
+        List<String> names = assets.stream().map(Asset::getName).toList();
+        response.setAssetNames(names);
         return response;
     }
 
