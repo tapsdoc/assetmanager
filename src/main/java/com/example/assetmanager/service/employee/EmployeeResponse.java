@@ -35,7 +35,6 @@ public class EmployeeResponse {
     }
 
     public static List<EmployeeResponse> of(List<Employee> employees) {
-        Objects.requireNonNull(employees);
         return employees.stream().map(EmployeeResponse::of).collect(Collectors.toList());
     }
 }
