@@ -15,8 +15,8 @@ public class AssetRequest {
     private String description;
     private String image;
     private Double price;
-    private LocalDateTime dateOfPurchase;
-    private LocalDateTime dateOfAssignment;
+    private LocalDate dateOfPurchase;
+    private LocalDate dateOfAssignment;
     private LocalDate dateOfManufacture;
     private String assetStatus;
     private Long supplierId;

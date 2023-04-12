@@ -47,5 +47,4 @@ public class Category {
             asset.setCategory(null);
         }
     }
-
 }

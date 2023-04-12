@@ -4,7 +4,6 @@ import com.example.assetmanager.domain.Asset;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -20,8 +19,8 @@ public class AssetResponse {
     private String description;
     private String image;
     private Double price;
-    private LocalDateTime dateOfPurchase;
-    private LocalDateTime dateOfAssignment;
+    private LocalDate dateOfPurchase;
+    private LocalDate dateOfAssignment;
     private LocalDate dateOfManufacture;
     private String assetStatus;
     private List<String> suppliers;
@@ -33,6 +32,7 @@ public class AssetResponse {
         response.setId(asset.getId());
         response.setAssetId(asset.getAssetId());
         response.setAssetModelNumber(asset.getAssetModelNumber());
+        response.setSerialNumber(asset.getSerialNumber());
         response.setName(asset.getName());
         response.setDescription(asset.getDescription());
         response.setImage(asset.getImage());

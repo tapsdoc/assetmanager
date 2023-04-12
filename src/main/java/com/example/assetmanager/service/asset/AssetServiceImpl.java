@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -110,5 +111,31 @@ public class AssetServiceImpl implements AssetService {
             throw new IllegalStateException("Id cannot be null");
         }
         assetRepo.deleteById(id);
+    }
+
+    @Override
+    public AssetResponse addCategoryToAsset(String assetId, Long categoryId) {
+        Asset asset = assetRepo.findAssetByAssetId(assetId);
+        Category category = categoryRepo.findById(categoryId).orElseThrow(() -> new IllegalStateException("Category not found"));
+
+        if (Objects.nonNull(asset.getCategory())) {
+            throw new IllegalArgumentException("Asset already has a category");
+        }
+        asset.setCategory(category);
+        category.addAsset(asset);
+        return AssetResponse.of(asset);
+    }
+
+    @Override
+    public AssetResponse RemoveCategoryFromAsset(String assetId, Long categoryId) {
+        Asset asset = assetRepo.findAssetByAssetId(assetId);
+        Category category = categoryRepo.findById(categoryId).orElseThrow(() -> new IllegalStateException("Category not found"));
+
+        if (!Objects.nonNull(asset.getCategory())) {
+            throw new IllegalArgumentException("Asset does not have a category to remove");
+        }
+        asset.setCategory(null);
+        category.removeAsset(asset);
+        return AssetResponse.of(asset);
     }
 }

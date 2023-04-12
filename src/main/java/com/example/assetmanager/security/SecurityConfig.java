@@ -1,6 +1,5 @@
 package com.example.assetmanager.security;
 
-import com.example.assetmanager.common.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
