@@ -11,9 +11,9 @@ import java.time.LocalDate;
 @Entity
 @Table(
     uniqueConstraints = {
-        @UniqueConstraint(name = "assetId_unique", columnNames = {"assetId"}),
-        @UniqueConstraint(name = "assetModelNumber_unique", columnNames = {"assetModelNumber"}),
-        @UniqueConstraint(name = "serial_unique", columnNames = {"serialNumber"})
+        @UniqueConstraint(name = "assetId_unique", columnNames = {"asset_id"}),
+        @UniqueConstraint(name = "assetModelNumber_unique", columnNames = {"asset_model_number"}),
+        @UniqueConstraint(name = "serial_unique", columnNames = {"serial_number"})
     }
 )
 @NoArgsConstructor
@@ -39,7 +39,7 @@ public class Asset {
     private LocalDate dateOfManufacture;
     @Enumerated(EnumType.STRING)
     private AssetStatus assetStatus;
-    @ManyToOne
+    @OneToOne
     private Supplier supplier;
     @ManyToOne(
         cascade = CascadeType.ALL,
