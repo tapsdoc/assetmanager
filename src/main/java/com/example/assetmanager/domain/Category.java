@@ -19,32 +19,10 @@ public class Category {
     @SequenceGenerator(name = "category_seq", sequenceName = "category_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
     private Long id;
-    private String name;
-    @OneToMany(
-        mappedBy = "category",
-        orphanRemoval = true,
-        cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
-        fetch = FetchType.LAZY
-    )
-    private List<Asset> assets = new ArrayList<>();
+    private String name;;
 
     @Builder
-    public Category(String name, List<Asset> assets) {
-        this.name = name;
-        this.assets = assets;
-    }
-
-    public void addAsset(Asset asset) {
-        if (!assets.contains(asset)) {
-            assets.add(asset);
-            asset.setCategory(this);
-        }
-    }
-
-    public void removeAsset(Asset asset) {
-        if (assets.contains(asset)) {
-            assets.remove(asset);
-            asset.setCategory(null);
-        }
+    public Category(String name) {
+        this.name = name;;
     }
 }

@@ -14,16 +14,11 @@ public class CategoryResponse {
 
     private Long id;
     private String name;
-    private List<String> assetNames;
 
     public static CategoryResponse of(@NonNull Category category) {
         CategoryResponse response = new CategoryResponse();
         response.setId(category.getId());
-        response.setName(category.getName());
-
-        List<Asset> assets = new ArrayList<>();
-        List<String> names = assets.stream().map(Asset::getName).toList();
-        response.setAssetNames(names);
+        response.setName(category.getName());;
         return response;
     }
 
