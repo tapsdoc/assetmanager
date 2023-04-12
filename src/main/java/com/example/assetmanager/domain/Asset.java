@@ -24,11 +24,11 @@ public class Asset {
     @SequenceGenerator(name = "asset_is_seq", sequenceName = "asset_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "asset_id_seq")
     private Long id;
-    @Column(unique = true, nullable = false)
+    @Column(name = "asset_id", unique = true, nullable = false)
     private String assetId;
-    @Column(unique = true, nullable = false)
+    @Column(name = "asset_model_number", unique = true, nullable = false)
     private String assetModelNumber;
-    @Column(unique = true, nullable = false)
+    @Column(name = "serial_number", unique = true, nullable = false)
     private String serialNumber;
     private String name;
     private String description;
