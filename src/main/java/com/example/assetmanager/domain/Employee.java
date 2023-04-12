@@ -2,7 +2,6 @@ package com.example.assetmanager.domain;
 
 import com.example.assetmanager.common.Users;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,10 +12,8 @@ import lombok.NoArgsConstructor;
         @UniqueConstraint(name = "unique_phone_number", columnNames = {"phone_number"})
     }
 )
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
 public class Employee {
 
     @Id
@@ -43,4 +40,25 @@ public class Employee {
     private String phoneNumber;
     private String address;
     private String profileImage;
+
+    @Builder
+    public Employee(
+        Users users,
+        String firstName,
+        String lastName,
+        Department department,
+        String designation,
+        String phoneNumber,
+        String address,
+        String profileImage) {
+
+        this.users = users;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.department = department;
+        this.designation = designation;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.profileImage = profileImage;
+    }
 }

@@ -2,6 +2,7 @@ package com.example.assetmanager.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,4 +27,12 @@ public class Comment {
     @Column(nullable = false)
     private String message;
     private LocalDateTime dateOfComment;
+
+    @Builder
+    public Comment(Employee employee, Asset asset, String message, LocalDateTime dateOfComment) {
+        this.employee = employee;
+        this.asset = asset;
+        this.message = message;
+        this.dateOfComment = dateOfComment;
+    }
 }

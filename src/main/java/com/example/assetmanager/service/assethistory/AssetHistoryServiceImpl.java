@@ -10,6 +10,7 @@ import com.example.assetmanager.repository.EmployeeRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,11 +46,13 @@ public class AssetHistoryServiceImpl implements AssetHistoryService {
 
     @Override
     public List<AssetHistoryResponse> getAllAssetHistory() {
-        return null;
+        List<AssetHistory> history = new ArrayList<>(assetHistoryRepo.findAll());
+        return AssetHistoryResponse.of(history);
     }
 
     @Override
     public AssetHistoryResponse getHistoryForAsset(Long id) {
-        return null;
+        var history = assetHistoryRepo.findById(id).orElseThrow(() -> new IllegalStateException("History of asset not found"));
+        return AssetHistoryResponse.of(history);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.assetmanager.security;
 
-import lombok.NonNull;
+import com.example.assetmanager.common.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -25,8 +23,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeHttpRequests()
-            .requestMatchers("/api/v1/auth/**").permitAll()
-            .anyRequest().permitAll()
+                .requestMatchers("/api/v1/auth/**").permitAll()
+                .anyRequest().permitAll()
             .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -37,3 +35,12 @@ public class SecurityConfig {
         return http.build();
     }
 }
+
+/*
+.requestMatchers("/api/v1/department/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name(), Role.MANAGER.name())
+                .requestMatchers("/api/v1/employee/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name(), Role.MANAGER.name())
+                .requestMatchers("/api/v1/asset/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name())
+                .requestMatchers("/api/v1/asset-history/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name(), Role.MANAGER.name())
+                .requestMatchers("/api/v1/department/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name())
+                .requestMatchers("/api/v1/user/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name())
+ */

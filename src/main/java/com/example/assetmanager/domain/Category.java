@@ -2,6 +2,7 @@ package com.example.assetmanager.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,6 +27,12 @@ public class Category {
         fetch = FetchType.LAZY
     )
     private List<Asset> assets = new ArrayList<>();
+
+    @Builder
+    public Category(String name, List<Asset> assets) {
+        this.name = name;
+        this.assets = assets;
+    }
 
     public void addAsset(Asset asset) {
         if (!assets.contains(asset)) {
