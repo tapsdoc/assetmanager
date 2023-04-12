@@ -1,7 +1,7 @@
 package com.example.assetmanager.service.user;
 
 import com.example.assetmanager.common.Role;
-import com.example.assetmanager.common.Users;
+import com.example.assetmanager.domain.Users;
 import com.example.assetmanager.repository.UserRepo;
 import com.example.assetmanager.security.JwtService;
 import com.example.assetmanager.service.user.registration.AuthRequest;
@@ -27,7 +27,8 @@ public class UserServiceImpl implements UserService {
 
     public AuthResponse register(RegisterRequest request){
 
-        var user = Users.builder()
+        Users user = Users.builder()
+            .username(request.getUsername())
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
             .role(Role.EMPLOYEE)

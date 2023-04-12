@@ -1,6 +1,6 @@
 package com.example.assetmanager.repository;
 
-import com.example.assetmanager.common.Users;
+import com.example.assetmanager.domain.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

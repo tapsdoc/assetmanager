@@ -1,5 +1,6 @@
-package com.example.assetmanager.common;
+package com.example.assetmanager.domain;
 
+import com.example.assetmanager.common.Role;
 import com.example.assetmanager.domain.Employee;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -36,9 +37,9 @@ public class Users implements UserDetails {
     @Column(nullable = false)
     private Role role;
     @Column(nullable = false, unique = true)
-    private String email;
-    @Column(nullable = false, unique = true)
     private String username;
+    @Column(nullable = false, unique = true)
+    private String email;
     @Column(nullable = false)
     private String password;
     private boolean locked;
