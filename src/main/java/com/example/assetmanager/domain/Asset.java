@@ -39,7 +39,7 @@ public class Asset {
     private LocalDate dateOfManufacture;
     @Enumerated(EnumType.STRING)
     private AssetStatus assetStatus;
-    @OneToOne
+    @ManyToOne
     private Supplier supplier;
     @ManyToOne(
         cascade = CascadeType.ALL,
