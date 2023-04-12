@@ -15,6 +15,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -51,5 +54,17 @@ public class UserServiceImpl implements UserService {
         return AuthResponse.builder()
             .token(jwtToken)
             .build();
+    }
+
+    @Override
+    public List<UserResponse> getAll() {
+        List<Users> users = new ArrayList<>(userRepo.findAll());
+        return UserResponse.of(users);
+    }
+
+    @Override
+    public UserResponse getUser(Long id) {
+        var user = userRepo.findById(id).orElseThrow(() -> new IllegalStateException("User not found"));
+        return UserResponse.of(user);
     }
 }
