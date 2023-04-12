@@ -23,8 +23,8 @@ public class AssetResponse {
     private LocalDate dateOfAssignment;
     private LocalDate dateOfManufacture;
     private String assetStatus;
-    private List<String> suppliers;
-    private String categoryName;
+    private String supplier;
+    private String category;
 
     public static AssetResponse of(Asset asset) {
         Objects.requireNonNull(asset);
@@ -41,7 +41,7 @@ public class AssetResponse {
         response.setDateOfManufacture(asset.getDateOfManufacture());
         response.setDateOfAssignment(asset.getDateOfAssignment());
         response.setAssetStatus(asset.getAssetStatus().name());
-        response.setCategoryName(asset.getCategory().getName());
+        response.setCategory(asset.getCategory().getName());
         return response;
     }
 
