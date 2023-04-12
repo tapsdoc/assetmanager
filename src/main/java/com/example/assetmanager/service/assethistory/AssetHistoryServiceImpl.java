@@ -21,6 +21,7 @@ public class AssetHistoryServiceImpl implements AssetHistoryService {
     private final AssetHistoryRepo assetHistoryRepo;
     private final AssetRepo assetRepo;
     private final EmployeeRepo employeeRepo;
+
     @Override
     public AssetHistoryResponse addAssetToHistory(AssetHistoryRequest request) {
 
@@ -37,7 +38,7 @@ public class AssetHistoryServiceImpl implements AssetHistoryService {
         }
         history.setEmployee(employee.get());
         history.setDateOfCreation(request.getDateOfCreation());
-        history.setAction(Action.valueOf(request.getAction()));
+        history.setAction(Action.UNASSIGNED);
         history.setNote(request.getNote());
 
         var savedHistory = assetHistoryRepo.save(history);
