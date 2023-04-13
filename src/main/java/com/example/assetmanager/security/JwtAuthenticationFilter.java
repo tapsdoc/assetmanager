@@ -1,6 +1,5 @@
 package com.example.assetmanager.security;
 
-import com.google.common.base.Strings;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,28 +29,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
-
         final String authHeader = request.getHeader("Authorization");
-        final String jwtToken;
-        final String username;
-
-        if (Strings.isNullOrEmpty(authHeader) || !authHeader.startsWith("Bearer ")) {
+        final String jwt;
+        final String userName;
+        if (authHeader == null ||!authHeader.startsWith("Bearer")){
             filterChain.doFilter(request, response);
             return;
         }
-        jwtToken = authHeader.substring(7);
-        username = jwtService.extractUsername(jwtToken);
-
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            // Check user in the database and update the authToken
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-            if (jwtService.isTokenValid(jwtToken, userDetails)){
+        jwt = authHeader.substring(7);
+        userName = jwtService.extractUsername(jwt);
+        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null){
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userName);
+            if (jwtService.isTokenValid(jwt, userDetails)){
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails,
-                        null,
-                        userDetails.getAuthorities()
+                    userDetails,
+                    null,
+                    userDetails.getAuthorities()
                 );
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                authToken.setDetails(
+                    new WebAuthenticationDetailsSource().buildDetails(request)
+                );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
