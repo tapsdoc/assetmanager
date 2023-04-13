@@ -20,7 +20,7 @@ public class AssetHistoryResponse {
     private String actionDate;
 
     public static AssetHistoryResponse of(AssetHistory assetHistory) {
-        Objects.requireNonNull(assetHistory);
+
         AssetHistoryResponse response = new AssetHistoryResponse();
 
         response.setAssetName(assetHistory.getAsset().getName());
