@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Data
@@ -23,8 +22,13 @@ public class AssetHistoryResponse {
 
         AssetHistoryResponse response = new AssetHistoryResponse();
 
+        response.setId(assetHistory.getId());
         response.setAssetName(assetHistory.getAsset().getName());
-        response.setEmployeeName(assetHistory.getEmployee().getFirstName() + " " + assetHistory.getEmployee().getLastName());
+        if (assetHistory.getEmployee() != null) {
+            response.setEmployeeName(assetHistory.getEmployee().getFirstName() + " " + assetHistory.getEmployee().getLastName());
+        } else {
+            response.setEmployeeName(null);
+        }
         response.setActionDate(String.valueOf(assetHistory.getActionDate()));
         response.setAction(assetHistory.getAction().name());
         response.setNote(assetHistory.getNote());
