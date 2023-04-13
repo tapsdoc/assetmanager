@@ -35,13 +35,17 @@ public class AssetServiceImpl implements AssetService {
             throw new IllegalStateException("Category is not found");
         }
 
-        Supplier supplier = Supplier.builder()
-            .name(request.getSupplier().getName())
-            .address(request.getSupplier().getAddress())
-            .contactEmail(request.getSupplier().getContactEmail())
-            .contactNumber(request.getSupplier().getContactNumber())
-            .build();
-        supplierRepo.save(supplier);
+        String supplierName = request.getSupplier().getName();
+        Supplier supplier = supplierRepo.findSupplierByName(supplierName)
+            .orElseGet(() -> {
+                Supplier newSupplier = Supplier.builder()
+                    .name(supplierName)
+                    .address(request.getSupplier().getAddress())
+                    .contactEmail(request.getSupplier().getContactEmail())
+                    .contactNumber(request.getSupplier().getContactNumber())
+                    .build();
+                return supplierRepo.save(newSupplier);
+            });
 
         Asset asset = Asset.builder()
             .assetId(request.getAssetId())
