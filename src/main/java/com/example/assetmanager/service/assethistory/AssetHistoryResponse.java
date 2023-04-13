@@ -1,6 +1,7 @@
 package com.example.assetmanager.service.assethistory;
 
 import com.example.assetmanager.domain.AssetHistory;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.List;
@@ -15,7 +16,8 @@ public class AssetHistoryResponse {
     private String employeeName;
     private String action;
     private String note;
-    private String dateOfCreation;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private String actionDate;
 
     public static AssetHistoryResponse of(AssetHistory assetHistory) {
         Objects.requireNonNull(assetHistory);
@@ -23,7 +25,7 @@ public class AssetHistoryResponse {
 
         response.setAssetName(assetHistory.getAsset().getName());
         response.setEmployeeName(assetHistory.getEmployee().getFirstName() + " " + assetHistory.getEmployee().getLastName());
-        response.setDateOfCreation(String.valueOf(assetHistory.getActionDate()));
+        response.setActionDate(String.valueOf(assetHistory.getActionDate()));
         response.setAction(assetHistory.getAction().name());
         response.setNote(assetHistory.getNote());
         return response;
