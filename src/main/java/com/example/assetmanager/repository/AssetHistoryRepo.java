@@ -12,8 +12,4 @@ public interface AssetHistoryRepo extends JpaRepository<AssetHistory, Long> {
     @Query("SELECT a FROM AssetHistory a")
     @Override
     List<AssetHistory> findAll();
-
-    @Query("SELECT a FROM AssetHistory a WHERE a.id =: id")
-    @Override
-    Optional<AssetHistory> findById(Long id);
 }
