@@ -23,7 +23,7 @@ public class AssetHistoryResponse {
 
         response.setAssetName(assetHistory.getAsset().getName());
         response.setEmployeeName(assetHistory.getEmployee().getFirstName() + " " + assetHistory.getEmployee().getLastName());
-        response.setDateOfCreation(assetHistory.getDateOfCreation());
+        response.setDateOfCreation(String.valueOf(assetHistory.getActionDate()));
         response.setAction(assetHistory.getAction().name());
         response.setNote(assetHistory.getNote());
         return response;

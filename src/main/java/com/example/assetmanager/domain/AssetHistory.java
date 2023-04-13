@@ -1,11 +1,13 @@
 package com.example.assetmanager.domain;
 
 import com.example.assetmanager.common.Action;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -34,13 +36,15 @@ public class AssetHistory {
     @Enumerated(value = EnumType.STRING)
     private Action action;
     private String note;
-    private boolean isAssigned = false;
+    private boolean isAssigned;
     private boolean isDamaged;
     private boolean isReturned;
-    private String dateOfCreation;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime actionDate;
 
     @Builder
-    public AssetHistory(Asset asset, Employee employee, Action action, String note, boolean isAssigned, boolean isDamaged, boolean isReturned, String dateOfCreation) {
+    public AssetHistory(Asset asset, Employee employee, Action action, String note, boolean isAssigned, boolean isDamaged, boolean isReturned, LocalDateTime actionDate) {
         this.asset = asset;
         this.employee = employee;
         this.action = action;
@@ -48,6 +52,6 @@ public class AssetHistory {
         this.isAssigned = isAssigned;
         this.isDamaged = isDamaged;
         this.isReturned = isReturned;
-        this.dateOfCreation = dateOfCreation;
+        this.actionDate = actionDate;
     }
 }

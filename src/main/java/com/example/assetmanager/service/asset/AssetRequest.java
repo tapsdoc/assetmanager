@@ -1,5 +1,7 @@
 package com.example.assetmanager.service.asset;
 
+import com.example.assetmanager.domain.Supplier;
+import com.example.assetmanager.service.supplier.SupplierRequest;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -19,6 +21,6 @@ public class AssetRequest {
     private LocalDate dateOfAssignment;
     private LocalDate dateOfManufacture;
     private String assetStatus;
-    private Long supplierId;
+    private SupplierRequest supplier;
     private Long categoryId;
 }

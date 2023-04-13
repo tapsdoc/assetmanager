@@ -1,15 +1,19 @@
 package com.example.assetmanager.service.asset;
 
+import com.example.assetmanager.common.Action;
 import com.example.assetmanager.common.AssetStatus;
 import com.example.assetmanager.domain.Asset;
+import com.example.assetmanager.domain.AssetHistory;
 import com.example.assetmanager.domain.Category;
 import com.example.assetmanager.domain.Supplier;
+import com.example.assetmanager.repository.AssetHistoryRepo;
 import com.example.assetmanager.repository.AssetRepo;
 import com.example.assetmanager.repository.CategoryRepo;
 import com.example.assetmanager.repository.SupplierRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,16 +24,24 @@ import java.util.Optional;
 public class AssetServiceImpl implements AssetService {
 
     private final AssetRepo assetRepo;
+    private final AssetHistoryRepo assetHistoryRepo;
     private final CategoryRepo categoryRepo;
     private final SupplierRepo supplierRepo;
 
     @Override
     public AssetResponse addAsset(AssetRequest request) {
-
         Optional<Category> category = categoryRepo.findById(request.getCategoryId());
         if (category.isEmpty()) {
             throw new IllegalStateException("Category is not found");
         }
+
+        Supplier supplier = Supplier.builder()
+            .name(request.getSupplier().getName())
+            .address(request.getSupplier().getAddress())
+            .contactEmail(request.getSupplier().getContactEmail())
+            .contactNumber(request.getSupplier().getContactNumber())
+            .build();
+        supplierRepo.save(supplier);
 
         Asset asset = Asset.builder()
             .assetId(request.getAssetId())
@@ -37,6 +49,7 @@ public class AssetServiceImpl implements AssetService {
             .assetModelNumber(request.getAssetModelNumber())
             .description(request.getDescription())
             .serialNumber(request.getSerialNumber())
+            .supplier(supplier)
             .dateOfPurchase(request.getDateOfPurchase())
             .description(request.getDescription())
             .unitPrice(request.getPrice())
@@ -46,6 +59,17 @@ public class AssetServiceImpl implements AssetService {
             .build();
 
         var savedAsset = assetRepo.save(asset);
+
+        AssetHistory history = AssetHistory.builder()
+            .asset(savedAsset)
+            .employee(null)
+            .actionDate(LocalDateTime.now())
+            .action(Action.CREATED)
+            .isAssigned(false)
+            .isReturned(true)
+            .build();
+
+        assetHistoryRepo.save(history);
         return AssetResponse.of(savedAsset);
     }
 
@@ -54,7 +78,6 @@ public class AssetServiceImpl implements AssetService {
 
         Asset asset = assetRepo.findById(id).orElseThrow(() -> new IllegalStateException("Asset not found"));
         Optional<Category> category = categoryRepo.findById(request.getCategoryId());
-        Supplier supplier = supplierRepo.findById(request.getSupplierId()).get();
 
         if (request.getAssetId() != null) {
             asset.setAssetId(request.getAssetId());
@@ -67,9 +90,6 @@ public class AssetServiceImpl implements AssetService {
         }
         if (request.getSerialNumber() != null) {
             asset.setSerialNumber(request.getSerialNumber());
-        }
-        if (request.getSupplierId() != null) {
-            asset.setSupplier(supplier);
         }
         if (request.getDateOfManufacture() != null) {
             asset.setDateOfManufacture(request.getDateOfManufacture());
@@ -90,7 +110,7 @@ public class AssetServiceImpl implements AssetService {
             asset.setCategory(category.get());
         }
         var updatedAsset = assetRepo.save(asset);
-         return AssetResponse.of(updatedAsset);
+        return AssetResponse.of(updatedAsset);
     }
 
     @Override

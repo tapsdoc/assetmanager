@@ -2,6 +2,7 @@ package com.example.assetmanager.domain;
 
 import com.example.assetmanager.common.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,7 @@ public class Users implements UserDetails {
     @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false, unique = true)
+    @Email
     private String email;
     @Column(nullable = false)
     private String password;

@@ -41,12 +41,12 @@ public class AssetResponse {
         response.setDateOfManufacture(asset.getDateOfManufacture());
         response.setDateOfAssignment(asset.getDateOfAssignment());
         response.setAssetStatus(asset.getAssetStatus().name());
+        response.setSupplier(asset.getSupplier().getName());
         response.setCategory(asset.getCategory().getName());
         return response;
     }
 
     public static List<AssetResponse> of(List<Asset> assets) {
-        Objects.requireNonNull(assets);
         return assets.stream().map(AssetResponse::of).collect(Collectors.toList());
     }
 }

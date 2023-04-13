@@ -10,6 +10,7 @@ import com.example.assetmanager.repository.EmployeeRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +38,7 @@ public class AssetHistoryServiceImpl implements AssetHistoryService {
             throw new IllegalStateException("Employee not found");
         }
         history.setEmployee(employee.get());
-        history.setDateOfCreation(request.getDateOfCreation());
+        history.setActionDate(LocalDateTime.now());
         history.setAction(Action.UNASSIGNED);
         history.setNote(request.getNote());
 
