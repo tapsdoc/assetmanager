@@ -32,7 +32,6 @@ public class AssetHistoryResponse {
     }
 
     public static List<AssetHistoryResponse> of(List<AssetHistory> assetHistories) {
-        Objects.requireNonNull(assetHistories);
         return assetHistories.stream().map(AssetHistoryResponse::of).collect(Collectors.toList());
     }
 }
