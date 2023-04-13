@@ -37,9 +37,9 @@ public class SecurityConfig {
 
 /*
 .requestMatchers("/api/v1/department/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name(), Role.MANAGER.name())
-                .requestMatchers("/api/v1/employee/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name(), Role.MANAGER.name())
-                .requestMatchers("/api/v1/asset/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name())
-                .requestMatchers("/api/v1/asset-history/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name(), Role.MANAGER.name())
-                .requestMatchers("/api/v1/department/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name())
-                .requestMatchers("/api/v1/user/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name())
- */
+.requestMatchers("/api/v1/employee/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name(), Role.MANAGER.name())
+.requestMatchers("/api/v1/asset/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name())
+.requestMatchers("/api/v1/asset-history/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name(), Role.MANAGER.name())
+.requestMatchers("/api/v1/department/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name())
+.requestMatchers("/api/v1/user/**").hasAnyRole(Role.ADMIN.name(), Role.SUPER_USER.name())
+*/
