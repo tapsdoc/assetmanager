@@ -90,7 +90,7 @@ public class AssetServiceImpl implements AssetService {
             asset.setCategory(category.get());
         }
         var updatedAsset = assetRepo.save(asset);
-         return AssetResponse.of(asset);
+         return AssetResponse.of(updatedAsset);
     }
 
     @Override
@@ -128,7 +128,6 @@ public class AssetServiceImpl implements AssetService {
     @Override
     public AssetResponse RemoveCategoryFromAsset(String assetId, Long categoryId) {
         Asset asset = assetRepo.findAssetByAssetId(assetId);
-        Category category = categoryRepo.findById(categoryId).orElseThrow(() -> new IllegalStateException("Category not found"));
 
         if (!Objects.nonNull(asset.getCategory())) {
             throw new IllegalArgumentException("Asset does not have a category to remove");
