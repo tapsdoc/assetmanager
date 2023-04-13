@@ -122,7 +122,6 @@ public class AssetServiceImpl implements AssetService {
             throw new IllegalArgumentException("Asset already has a category");
         }
         asset.setCategory(category);
-        category.addAsset(asset);
         return AssetResponse.of(asset);
     }
 
@@ -135,7 +134,6 @@ public class AssetServiceImpl implements AssetService {
             throw new IllegalArgumentException("Asset does not have a category to remove");
         }
         asset.setCategory(null);
-        category.removeAsset(asset);
         return AssetResponse.of(asset);
     }
 }
