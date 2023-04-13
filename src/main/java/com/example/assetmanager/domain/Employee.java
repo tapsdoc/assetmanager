@@ -22,8 +22,7 @@ public class Employee {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(
         name = "users_id",
-        referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "user_id_fk")
+        referencedColumnName = "id"
     )
     private Users users;
     @Column(nullable = false)

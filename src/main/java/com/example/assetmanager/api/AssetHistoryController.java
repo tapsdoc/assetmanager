@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
-@RequestMapping("api/v1/asset-history")
+@RequestMapping("api/v1/asset-history/")
 @RequiredArgsConstructor
 public class AssetHistoryController {
 
