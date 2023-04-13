@@ -17,7 +17,6 @@ import java.util.List;
 @Table(
     name = "users",
     uniqueConstraints = {
-        @UniqueConstraint(name = "unique_employee_username", columnNames = {"username"}),
         @UniqueConstraint(name = "unique_employee_email", columnNames = {"email"})
     }
 )
@@ -37,8 +36,6 @@ public class Users implements UserDetails {
     @Column(nullable = false)
     private Role role;
     @Column(nullable = false, unique = true)
-    private String username;
-    @Column(nullable = false, unique = true)
     @Email
     private String email;
     @Column(nullable = false)
@@ -53,9 +50,8 @@ public class Users implements UserDetails {
     private Employee employee;
 
     @Builder
-    public Users(String email, String username, String password, Role role) {
+    public Users(String email, String password, Role role) {
         this.email = email;
-        this.username = username;
         this.password = password;
         this.role = role;
     }
@@ -72,7 +68,7 @@ public class Users implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override

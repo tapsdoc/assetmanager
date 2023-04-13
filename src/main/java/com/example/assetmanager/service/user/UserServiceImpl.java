@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService {
     public AuthResponse register(RegisterRequest request){
 
         Users user = Users.builder()
-            .username(request.getUsername())
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
             .role(Role.EMPLOYEE)
