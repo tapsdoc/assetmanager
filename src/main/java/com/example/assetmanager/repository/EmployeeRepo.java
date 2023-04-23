@@ -11,4 +11,7 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
     @Query("SELECT e FROM Employee e")
     @Override
     List<Employee> findAll();
+
+    @Query("SELECT COUNT(e) FROM Employee e")
+    Long numberOfEmployees();
 }

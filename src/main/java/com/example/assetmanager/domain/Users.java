@@ -50,11 +50,16 @@ public class Users implements UserDetails {
     private Employee employee;
 
     @Builder
-    public Users(String email, String password, Role role) {
+    public Users(Role role, String email, String password, boolean locked, boolean enabled) {
+        this.role = role;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.locked = locked;
+        this.enabled = enabled;
     }
+
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

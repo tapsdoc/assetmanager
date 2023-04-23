@@ -19,9 +19,9 @@ public class AssetResponse {
     private String description;
     private String image;
     private Double price;
-    private LocalDate dateOfPurchase;
-    private LocalDate dateOfAssignment;
-    private LocalDate dateOfManufacture;
+    private String dateOfPurchase;
+    private String dateOfAssignment;
+    private String dateOfManufacture;
     private String assetStatus;
     private String supplier;
     private String category;

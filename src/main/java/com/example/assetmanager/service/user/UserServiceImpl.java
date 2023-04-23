@@ -33,6 +33,8 @@ public class UserServiceImpl implements UserService {
         Users user = Users.builder()
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
+            .enabled(true)
+            .locked(false)
             .role(Role.EMPLOYEE)
             .build();
         userRepo.save(user);

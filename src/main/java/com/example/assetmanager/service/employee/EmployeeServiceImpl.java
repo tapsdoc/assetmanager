@@ -47,6 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (existingUser.getEmployee() != null) {
             throw new RuntimeException("User already has an associated employee!");
         }
+        employee.setUsers(existingUser);
         employee.setFirstName(request.getFirstName());
         employee.setLastName(request.getLastName());
 

@@ -13,4 +13,13 @@ public interface AssetRepo extends JpaRepository<Asset, Long> {
     List<Asset> findAll();
 
     Asset findAssetByAssetId(String assetId);
+
+    @Query("SELECT COUNT(a) FROM Asset a")
+    Long numberOfAssets();
+
+    @Query("SELECT COUNT(a) FROM Asset a WHERE a.action = 'ASSIGNED'")
+    Long numberOfAssigned();
+
+    @Query("SELECT COUNT(a) FROM Asset a WHERE a.action = 'UNASSIGNED'")
+    Long numberOfUnassigned();
 }

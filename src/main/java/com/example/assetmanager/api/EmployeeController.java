@@ -3,11 +3,13 @@ package com.example.assetmanager.api;
 import com.example.assetmanager.service.employee.EmployeeRequest;
 import com.example.assetmanager.service.employee.EmployeeResponse;
 import com.example.assetmanager.service.employee.EmployeeService;
+import com.example.assetmanager.service.stats.EmployeeStats;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,6 +17,7 @@ import java.util.List;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final EmployeeStats employeeStats;
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.OK)
@@ -38,5 +41,11 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable Long id) {
         employeeService.delete(id);
+    }
+
+    @GetMapping("/number-of-employees")
+    @ResponseStatus(HttpStatus.OK)
+    public Map<String, Long> numberOfEmployees() {
+        return employeeStats.numberOfEmployees();
     }
 }

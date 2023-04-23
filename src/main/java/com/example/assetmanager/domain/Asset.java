@@ -1,5 +1,6 @@
 package com.example.assetmanager.domain;
 
+import com.example.assetmanager.common.Action;
 import com.example.assetmanager.common.AssetStatus;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -34,11 +35,13 @@ public class Asset {
     private String description;
     private Double unitPrice;
     private String image;
-    private LocalDate dateOfPurchase;
-    private LocalDate dateOfAssignment;
-    private LocalDate dateOfManufacture;
+    private String dateOfPurchase;
+    private String dateOfAssignment;
+    private String dateOfManufacture;
     @Enumerated(EnumType.STRING)
     private AssetStatus assetStatus;
+    @Enumerated(EnumType.STRING)
+    private Action action;
     @ManyToOne
     private Supplier supplier;
     @ManyToOne(
@@ -48,8 +51,7 @@ public class Asset {
     private Category category;
 
     @Builder
-
-    public Asset(String assetId, String assetModelNumber, String serialNumber, String name, String description, Double unitPrice, String image, LocalDate dateOfPurchase, LocalDate dateOfAssignment, LocalDate dateOfManufacture, AssetStatus assetStatus, Supplier supplier, Category category) {
+    public Asset(String assetId, String assetModelNumber, String serialNumber, String name, String description, Double unitPrice, String image, String dateOfPurchase, String dateOfAssignment, String dateOfManufacture, AssetStatus assetStatus, Action action, Supplier supplier, Category category) {
         this.assetId = assetId;
         this.assetModelNumber = assetModelNumber;
         this.serialNumber = serialNumber;
@@ -61,6 +63,7 @@ public class Asset {
         this.dateOfAssignment = dateOfAssignment;
         this.dateOfManufacture = dateOfManufacture;
         this.assetStatus = assetStatus;
+        this.action = action;
         this.supplier = supplier;
         this.category = category;
     }

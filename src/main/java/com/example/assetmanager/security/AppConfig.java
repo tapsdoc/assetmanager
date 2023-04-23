@@ -50,17 +50,4 @@ public class AppConfig {
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-
-    @Bean
-    public WebMvcConfigurer corsMappingConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(@NonNull CorsRegistry registry) {
-                registry.addMapping("/**")
-                    .allowedOrigins("http://localhost:4200")
-                    .allowedHeaders("Access-Control-Allow-Origin")
-                    .allowedMethods("*");
-            }
-        };
-    }
 }
