@@ -24,7 +24,21 @@ public interface AssetService {
         MultipartFile image
         ) throws IOException;
 
-    AssetResponse editAsset(Long id, AssetRequest request);
+    AssetResponse editAsset(
+        Long id,
+        String assetId,
+        String name,
+        String assetModelNumber,
+        String serialNumber,
+        Double price,
+        Long categoryId,
+        String dateOfPurchase,
+        String dateOfManufacture,
+        String description,
+        String assetStatus,
+        Long supplierId,
+        MultipartFile image
+    ) throws IOException;
 
     AssetResponse getAssetByAssetId(String assetId);
 

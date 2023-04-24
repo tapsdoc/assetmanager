@@ -1,6 +1,7 @@
 package com.example.assetmanager.api;
 
 
+import com.example.assetmanager.domain.AssetHistory;
 import com.example.assetmanager.service.assethistory.AssetHistoryResponse;
 import com.example.assetmanager.service.assethistory.AssetHistoryService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class AssetHistoryController {
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public List<AssetHistoryResponse> getAllHistory() {
+    public List<AssetHistory> getAllHistory() {
         return historyService.getAllAssetHistory();
     }
 }

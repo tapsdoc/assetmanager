@@ -53,6 +53,41 @@ public class AssetController {
         );
     }
 
+    @PutMapping("/edit/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public AssetResponse editAsset(
+        @PathVariable Long id,
+        @RequestParam String assetId,
+        @RequestParam String name,
+        @RequestParam String assetModelNumber,
+        @RequestParam String serialNumber,
+        @RequestParam Double price,
+        @RequestParam Long categoryId,
+        @RequestParam String dateOfPurchase,
+        @RequestParam String dateOfManufacture,
+        @RequestParam String description,
+        @RequestParam String assetStatus,
+        @RequestParam Long supplierId,
+        @RequestParam(required = false) MultipartFile image
+    ) throws IOException {
+
+        return assetService.editAsset(
+            id,
+            assetId,
+            name,
+            assetModelNumber,
+            serialNumber,
+            price,
+            categoryId,
+            dateOfPurchase,
+            dateOfManufacture,
+            description,
+            assetStatus,
+            supplierId,
+            image
+        );
+    }
+
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<AssetResponse> getAllAssets() {

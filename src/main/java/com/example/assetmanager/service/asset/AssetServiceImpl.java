@@ -90,41 +90,54 @@ public class AssetServiceImpl implements AssetService {
     }
 
     @Override
-    public AssetResponse editAsset(Long id, AssetRequest request) {
+    public AssetResponse editAsset(
+        Long id,
+        String assetId,
+        String name,
+        String assetModelNumber,
+        String serialNumber,
+        Double price,
+        Long categoryId,
+        String dateOfPurchase,
+        String dateOfManufacture,
+        String description,
+        String assetStatus,
+        Long supplierId,
+        MultipartFile image
+    ) throws IOException {
 
         Asset asset = assetRepo.findById(id).orElseThrow(() -> new IllegalStateException("Asset not found"));
-        Optional<Category> category = categoryRepo.findById(request.getCategoryId());
+        Optional<Category> category = categoryRepo.findById(categoryId);
 
-        if (request.getAssetId() != null) {
-            asset.setAssetId(request.getAssetId());
+        if (assetId != null) {
+            asset.setAssetId(assetId);
         }
-        if (request.getName() != null) {
-            asset.setName(request.getName());
+        if (name != null) {
+            asset.setName(name);
         }
-        if (request.getAssetModelNumber() != null) {
-            asset.setAssetModelNumber(request.getAssetModelNumber());
+        if (assetModelNumber != null) {
+            asset.setAssetModelNumber(assetModelNumber);
         }
-        if (request.getSerialNumber() != null) {
-            asset.setSerialNumber(request.getSerialNumber());
+        if (serialNumber != null) {
+            asset.setSerialNumber(serialNumber);
         }
-        if (request.getDateOfManufacture() != null) {
-            asset.setDateOfManufacture(String.valueOf(request.getDateOfManufacture()));
+        if (dateOfPurchase != null) {
+            asset.setDateOfPurchase(dateOfPurchase);
         }
-        if (request.getDateOfPurchase() != null) {
-            asset.setDateOfPurchase(String.valueOf(request.getDateOfPurchase()));
+        if (dateOfManufacture != null) {
+            asset.setDateOfManufacture(dateOfManufacture);
         }
-        if (request.getAssetStatus() != null) {
-            asset.setAssetStatus(AssetStatus.valueOf(request.getAssetStatus()));
+        if (assetStatus != null) {
+            asset.setAssetStatus(AssetStatus.valueOf(assetStatus));
         }
-        if (request.getDescription() != null) {
-            asset.setDescription(request.getDescription());
+        if (description != null) {
+            asset.setDescription(description);
         }
-        if (request.getCategoryId() != null) {
-            if (category.isEmpty()) {
-                throw new IllegalStateException("Category is not found");
-            }
-            asset.setCategory(category.get());
+        if (category.isEmpty()) {
+            throw new IllegalStateException("Category is not found");
         }
+        asset.setCategory(category.get());
+        saveProfileImage(asset, image);
         var updatedAsset = assetRepo.save(asset);
         return AssetResponse.of(updatedAsset);
     }
